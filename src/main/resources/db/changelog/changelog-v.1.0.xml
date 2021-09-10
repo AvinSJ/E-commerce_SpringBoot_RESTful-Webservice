@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <changeSet author="AVE (generated)" id="1630299566253-1">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="address"/>
+                </not>
+        </preConditions>
+        <createTable tableName="address">
+            <column name="address_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="city" type="VARCHAR(120)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="create_time" type="datetime"/>
+            <column name="lane" type="VARCHAR(120)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="street" type="VARCHAR(120)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_time" type="datetime"/>
+            <column name="zip" type="VARCHAR(15)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="AVE (generated)" id="1630299566253-2">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="address_sequence"/>
+            </not>
+        </preConditions>
+        <createTable tableName="address_sequence">
+            <column name="next_val" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="AVE (generated)" id="1630299566253-3">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="cart"/>
+            </not>
+        </preConditions>
+        <createTable tableName="cart">
+            <column autoIncrement="true" name="cart_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="cart_status" type="VARCHAR(255)"/>
+            <column name="total_amount" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="AVE (generated)" id="1630299566253-4">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="cartitem"/>
+            </not>
+        </preConditions>
+        <createTable tableName="cartitem">
+            <column autoIncrement="true" name="cart_item_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="quantity" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="total_price" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cart_id" type="BIGINT"/>
+            <column name="product_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="AVE (generated)" id="1630299566253-5">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="category"/>
+            </not>
+        </preConditions>
+        <createTable tableName="category">
+            <column autoIncrement="true" name="category_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="category_name" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="AVE (generated)" id="1630299566253-6">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="orders"/>
+            </not>
+        </preConditions>
+        <createTable tableName="orders">
+            <column autoIncrement="true" name="order_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="create_time" type="datetime"/>
+            <column name="order_amount" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="order_status" type="VARCHAR(120)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_time" type="datetime"/>
+            <column name="billing_address" type="BIGINT"/>
+            <column name="cart_id" type="BIGINT"/>
+            <column name="shipping_address" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="AVE (generated)" id="1630299566253-7">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="password_reset_token_entity"/>
+            </not>
+        </preConditions>
+        <createTable tableName="password_reset_token_entity">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="token" type="VARCHAR(255)"/>
+            <column name="user_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="AVE (generated)" id="1630299566253-8">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="products"/>
+            </not>
+        </preConditions>
+        <createTable tableName="products">
+            <column autoIncrement="true" name="product_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="create_time" type="datetime"/>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="price" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="product_name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="quantity" type="INT"/>
+            <column name="updated_time" type="datetime"/>
+            <column name="subcategory_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="AVE (generated)" id="1630299566253-9">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="vote"/>
+            </not>
+        </preConditions>
+        <createTable tableName="vote">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="vote" type="VARCHAR(255)"/>
+            <column name="review_id" type="BIGINT"/>
+            <column name="user_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="AVE (generated)" id="1630299566253-10">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="reviews"/>
+            </not>
+        </preConditions>
+        <createTable tableName="reviews">
+            <column autoIncrement="true" name="review_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+<!--            <column name="create_time" type="datetime"/>-->
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="rating" type="INT"/>
+<!--            <column name="updated_time" type="datetime"/>-->
+<!--            <column name="product_id" type="BIGINT"/>-->
+<!--            <column name="user_id" type="BIGINT"/>-->
+        </createTable>
+    </changeSet>
+    <changeSet id="16302995662511" author="avin">
+        <addColumn tableName="reviews">
+                        <column name="create_time" type="datetime"/>
+                        <column name="updated_time" type="datetime"/>
+                        <column name="product_id" type="BIGINT"/>
+                        <column name="user_id" type="BIGINT"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="AVE (generated)" id="1630299566253-11">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="sub_category_entity"/>
+            </not>
+        </preConditions>
+        <createTable tableName="sub_category_entity">
+            <column autoIncrement="true" name="sub_category_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="sub_category_name" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="category_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="AVE (generated)" id="1630299566253-12">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="user"/>
+            </not>
+        </preConditions>
+        <createTable tableName="user">
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="create_time" type="datetime"/>
+            <column name="email" type="VARCHAR(120)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email_verification_status" type="BIT(1)"/>
+            <column name="email_verification_token" type="VARCHAR(255)"/>
+            <column name="encrypted_password" type="VARCHAR(255)"/>
+            <column name="first_name" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_name" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="phone_number" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_time" type="datetime"/>
+            <column name="user_status" type="BIT(1)"/>
+            <column name="user_type" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="AVE (generated)" id="1630299566253-13">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="user_sequence"/>
+            </not>
+        </preConditions>
+        <createTable tableName="user_sequence">
+            <column name="next_val" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="AVE (generated)" id="1630299566253-14">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="wishlist"/>
+            </not>
+        </preConditions>
+        <createTable tableName="wishlist">
+            <column autoIncrement="true" name="wishlist_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="user_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="AVE (generated)" id="1630299566253-15">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="wishlist_products"/>
+            </not>
+        </preConditions>
+        <createTable tableName="wishlist_products">
+            <column name="wishlist_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="product_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="AVE (generated)" id="1630299566253-16">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <indexExists indexName="FK34h0pwav2nhuj5ouf43gsq74d" tableName="cartitem"/>
+            </not>
+        </preConditions>
+        <createIndex indexName="FK34h0pwav2nhuj5ouf43gsq74d" tableName="cartitem">
+            <column name="product_id"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet author="AVE (generated)" id="1630299566253-17">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <indexExists indexName="FK9tfr04ttb1ywd3xylm6vxjhts" tableName="orders"/>
+            </not>
+        </preConditions>
+        <createIndex indexName="FK9tfr04ttb1ywd3xylm6vxjhts" tableName="orders">
+            <column name="billing_address"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="AVE (generated)" id="1630299566253-18">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <indexExists indexName="FKc01w6uvyaak18u9fqposykjji" tableName="sub_category_entity"/>
+            </not>
+        </preConditions>
+        <createIndex indexName="FKc01w6uvyaak18u9fqposykjji" tableName="sub_category_entity">
+            <column name="category_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="AVE (generated)" id="1630299566253-19">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <indexExists indexName="FKcj0jvvlv7mum72m5qblw5m1tc" tableName="cartitem"/>
+            </not>
+        </preConditions>
+        <createIndex indexName="FKcj0jvvlv7mum72m5qblw5m1tc" tableName="cartitem">
+            <column name="cart_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="AVE (generated)" id="1630299566253-20">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <indexExists indexName="FKd4r80jm8s41fgoa0xv9yy5lo8" tableName="wishlist"/>
+            </not>
+        </preConditions>
+        <createIndex indexName="FKd4r80jm8s41fgoa0xv9yy5lo8" tableName="wishlist">
+            <column name="user_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="AVE (generated)" id="1630299566253-21">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <indexExists indexName="FKda8tuywtf0gb6sedwk7la1pgi" tableName="address"/>
+            </not>
+        </preConditions>
+        <createIndex indexName="FKda8tuywtf0gb6sedwk7la1pgi" tableName="address">
+            <column name="user_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="AVE (generated)" id="1630299566253-22">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <indexExists indexName="FKem2kq2qof1yvuwgqx6ot9hlhi" tableName="products"/>
+            </not>
+        </preConditions>
+        <createIndex indexName="FKem2kq2qof1yvuwgqx6ot9hlhi" tableName="products">
+            <column name="subcategory_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="AVE (generated)" id="1630299566253-23">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <indexExists indexName="FKhlq0ylq5sxd70s0pembuumc1d" tableName="wishlist_products"/>
+            </not>
+        </preConditions>
+        <createIndex indexName="FKhlq0ylq5sxd70s0pembuumc1d" tableName="wishlist_products">
+            <column name="wishlist_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="AVE (generated)" id="1630299566253-24">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <indexExists indexName="FKj5250epif3v4dxcsav8upv1gd" tableName="vote"/>
+            </not>
+        </preConditions>
+        <createIndex indexName="FKj5250epif3v4dxcsav8upv1gd" tableName="vote">
+            <column name="review_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="AVE (generated)" id="1630299566253-25">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <indexExists indexName="FKl70asp4l4w0jmbm1tqyofho4o" tableName="cart"/>
+            </not>
+        </preConditions>
+        <createIndex indexName="FKl70asp4l4w0jmbm1tqyofho4o" tableName="cart">
+            <column name="user_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="AVE (generated)" id="1630299566253-26">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <indexExists indexName="FKphwlvmc0spluru0mnfm3i3527" tableName="password_reset_token_entity"/>
+            </not>
+        </preConditions>
+        <createIndex indexName="FKphwlvmc0spluru0mnfm3i3527" tableName="password_reset_token_entity">
+            <column name="user_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="AVE (generated)" id="1630299566253-27">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <indexExists indexName="FKpj5y3q6hyu53f8q4pd6n7rndc" tableName="wishlist_products"/>
+            </not>
+        </preConditions>
+        <createIndex indexName="FKpj5y3q6hyu53f8q4pd6n7rndc" tableName="wishlist_products">
+            <column name="product_id"/>
+        </createIndex>
+    </changeSet>
+<!--    <changeSet author="AVE (generated)" id="1630299566253-28">-->
+<!--        <preConditions onFail="MARK_RAN">-->
+<!--            <not>-->
+<!--                <indexExists indexName="FKpl51cejpw4gy5swfar8br9ngi" tableName="reviews"/>-->
+<!--            </not>-->
+<!--        </preConditions>-->
+<!--        <createIndex indexName="FKpl51cejpw4gy5swfar8br9ngi" tableName="reviews">-->
+<!--            <column name="product_id"/>-->
+<!--        </createIndex>-->
+<!--    </changeSet>-->
+<!--    <changeSet author="AVE (generated)" id="1630299566253-29">-->
+<!--        <preConditions onFail="MARK_RAN">-->
+<!--            <not>-->
+<!--                <indexExists indexName="FKsdlcf7wf8l1k0m00gik0m6b1m" tableName="reviews"/>-->
+<!--            </not>-->
+<!--        </preConditions>-->
+<!--        <createIndex indexName="FKsdlcf7wf8l1k0m00gik0m6b1m" tableName="reviews">-->
+<!--&lt;!&ndash;            <column name="user_id"/>&ndash;&gt;-->
+<!--        </createIndex>-->
+<!--    </changeSet>-->
+    <changeSet author="AVE (generated)" id="1630299566253-30">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <indexExists indexName="FKtd3ktxfksudg5ncck099nqn02" tableName="orders"/>
+            </not>
+        </preConditions>
+        <createIndex indexName="FKtd3ktxfksudg5ncck099nqn02" tableName="orders">
+            <column name="shipping_address"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="AVE (generated)" id="1630299566253-31">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <indexExists indexName="FKtpihbdn6ws0hu56camb0bg2to" tableName="orders"/>
+            </not>
+        </preConditions>
+        <createIndex indexName="FKtpihbdn6ws0hu56camb0bg2to" tableName="orders">
+            <column name="cart_id"/>
+        </createIndex>
+    </changeSet>
+</databaseChangeLog>

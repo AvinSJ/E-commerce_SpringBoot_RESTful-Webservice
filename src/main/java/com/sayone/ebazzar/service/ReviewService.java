@@ -1,5 +1,6 @@
 package com.sayone.ebazzar.service;
 
+import com.sayone.ebazzar.dto.UserDto;
 import com.sayone.ebazzar.entity.*;
 import com.sayone.ebazzar.exception.ErrorMessages;
 import com.sayone.ebazzar.exception.RequestException;
@@ -8,6 +9,8 @@ import com.sayone.ebazzar.model.response.ReviewResponseModel;
 import com.sayone.ebazzar.repository.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -33,7 +36,13 @@ public class ReviewService {
     @Autowired
     OrderRepository orderRepository;
 
-    public ReviewResponseModel createReview(ReviewRequestModel reviewRequestModel, Long userId) {
+    @Autowired
+    UserService userService;
+
+    @Autowired
+    JavaMailSender javaMailSender;
+
+    public ReviewResponseModel createReview(ReviewRequestModel reviewRequestModel, Long userId,UserDto user) {
 
         ProductEntity productEntity = getProductById(reviewRequestModel.getProductId());
 
@@ -88,6 +97,19 @@ public class ReviewService {
         reviewResponseModel.setProductName(storedReview.getProductEntity().getProductName());
         reviewResponseModel.setProductDescription(storedReview.getProductEntity().getDescription());
 
+        ProductEntity productEntity1 = productRepository.findByProductId(reviewRequestModel.getProductId());
+
+        String emailMesssage = String.format("Hello %s,\n You have reviewed a product %s . \n " + //
+                        " As %s and rated the product %s \n\n Thank you, \n Ebazzar",
+                user.getFirstName(),productEntity.getProductName(),reviewRequestModel.getDescription(),reviewRequestModel.getRating()) ;
+
+        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+        simpleMailMessage.setFrom("avin.springdemo@gmail.com");
+        simpleMailMessage.setTo(user.getEmail());
+        simpleMailMessage.setSubject("You Reviewed a Product");
+        simpleMailMessage.setText(emailMesssage);
+        javaMailSender.send(simpleMailMessage);
+
         return reviewResponseModel;
     }
 
@@ -125,8 +147,8 @@ public class ReviewService {
         ReviewEntity updatedReview = reviewRepository.save(reviewEntity.get());
         ReviewResponseModel reviewResponseModel = new ReviewResponseModel();
         BeanUtils.copyProperties(updatedReview, reviewResponseModel);
-        reviewResponseModel.setProductName(updatedReview.getProductEntity().getProductName());
-        reviewResponseModel.setProductDescription(updatedReview.getProductEntity().getDescription());
+//        reviewResponseModel.setProductName(updatedReview.getProductEntity().getProductName());
+//        reviewResponseModel.setProductDescription(updatedReview.getProductEntity().getDescription());
 
         return reviewResponseModel;
     }
@@ -141,8 +163,8 @@ public class ReviewService {
 
         ReviewResponseModel reviewResponseModel = new ReviewResponseModel();
         BeanUtils.copyProperties(reviewEntity.get(), reviewResponseModel);
-        reviewResponseModel.setProductName(reviewEntity.get().getProductEntity().getProductName());
-        reviewResponseModel.setProductDescription(reviewEntity.get().getProductEntity().getDescription());
+//        reviewResponseModel.setProductName(reviewEntity.get().getProductEntity().getProductName());
+//        reviewResponseModel.setProductDescription(reviewEntity.get().getProductEntity().getDescription());
 
         return reviewResponseModel;
     }
@@ -165,8 +187,8 @@ public class ReviewService {
         for (ReviewEntity reviewEntity : reviewEntityList) {
             ReviewResponseModel reviewResponseModel = new ReviewResponseModel();
             BeanUtils.copyProperties(reviewEntity, reviewResponseModel);
-            reviewResponseModel.setProductName(reviewEntity.getProductEntity().getProductName());
-            reviewResponseModel.setProductDescription(reviewEntity.getProductEntity().getDescription());
+//            reviewResponseModel.setProductName(reviewEntity.getProductEntity().getProductName());
+//            reviewResponseModel.setProductDescription(reviewEntity.getProductEntity().getDescription());
             reviewResponseModels.add(reviewResponseModel);
         }
         return reviewResponseModels;
