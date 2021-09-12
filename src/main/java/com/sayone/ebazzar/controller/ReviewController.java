@@ -8,7 +8,7 @@ import com.sayone.ebazzar.entity.UserEntity;
 import com.sayone.ebazzar.entity.VoteEntity;
 import com.sayone.ebazzar.exception.ErrorMessages;
 import com.sayone.ebazzar.exception.RequestException;
-import com.sayone.ebazzar.model.Vote;
+import com.sayone.ebazzar.utilities.Vote;
 import com.sayone.ebazzar.model.request.ReviewRequestModel;
 import com.sayone.ebazzar.model.response.ReviewResponseModel;
 import com.sayone.ebazzar.repository.ReviewRepository;
@@ -18,15 +18,11 @@ import com.sayone.ebazzar.service.ReviewService;
 import com.sayone.ebazzar.service.UserService;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
-import org.apache.tomcat.util.net.jsse.JSSEImplementation;
 import org.quartz.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.scheduling.quartz.SimpleTriggerFactoryBean;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -35,7 +31,6 @@ import org.springframework.web.bind.annotation.*;
 import java.time.Instant;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 @RestController
 @RequestMapping(RestResources.REVIEW_ROOT)
