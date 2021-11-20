@@ -37,7 +37,7 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
                     .readValue(req.getInputStream(), UserLoginRequestModel.class);
 
 
-            return authenticationManager.authenticate(
+            return authenticationManager. authenticate(
                     new UsernamePasswordAuthenticationToken(
                             creds.getEmail(),
                             creds.getPassword(),

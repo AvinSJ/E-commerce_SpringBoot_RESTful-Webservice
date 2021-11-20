@@ -4,6 +4,10 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+####
+liquibase-outputChangeLog.xml
+
+
 ### STS ###
 .apt_generated
 .classpath
