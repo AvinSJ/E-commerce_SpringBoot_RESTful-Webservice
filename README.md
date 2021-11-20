@@ -27,3 +27,8 @@ System Architecture :
 Entity Relationship Diagram:
 
 ![Ebazzar DB Design](https://user-images.githubusercontent.com/54039321/127616645-307e92ad-5ce7-4a6f-8e61-104d38bebb2e.png)
+
+
+### Swagger API Documentation 
+
+http://localhost:8080/swagger-ui/index.html
